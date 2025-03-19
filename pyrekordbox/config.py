@@ -15,13 +15,11 @@ import os
 import re
 import sys
 import textwrap
-import time
 import xml.etree.cElementTree as xml
 from pathlib import Path
 from typing import Union
 
 import blowfish
-import frida
 import packaging.version
 
 from .utils import get_rekordbox_pid
@@ -409,18 +407,20 @@ class KeyExtractor:
             raise RuntimeError(
                 "Rekordbox is running. Please close Rekordbox before running the `KeyExtractor`."
             )
-        # Spawn Rekordbox process and attach to it
-        pid = frida.spawn(self.executable)
-        frida.resume(pid)
-        session = frida.attach(pid)
-        script = session.create_script(self.SCRIPT)
-        script.on("message", self.on_message)
-        script.load()
-        # Wait for key to be extracted
-        while not self.key:
-            time.sleep(0.1)
-        # Kill Rekordbox process
-        frida.kill(pid)
+
+        raise RuntimeError("No Frida on this branch.")
+        # # Spawn Rekordbox process and attach to it
+        # pid = frida.spawn(self.executable)
+        # frida.resume(pid)
+        # session = frida.attach(pid)
+        # script = session.create_script(self.SCRIPT)
+        # script.on("message", self.on_message)
+        # script.load()
+        # # Wait for key to be extracted
+        # while not self.key:
+        #     time.sleep(0.1)
+        # # Kill Rekordbox process
+        # frida.kill(pid)
 
         return self.key
 

@@ -37,7 +37,6 @@ dependencies = [
     "psutil>=5.9.0",
     "sqlalchemy>=2.0.0",
     "sqlcipher3-wheels",
-    "frida-tools",
     "python-dateutil",
 ]
 
